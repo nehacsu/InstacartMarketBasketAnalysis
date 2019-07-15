@@ -44,7 +44,7 @@ except:
 cursor.execute("commit")
 ```
 
-## insert data into aisles table
+## Insert data into aisles table
 ```
 import csv
 with open('aisles.csv') as csv_file:
