@@ -43,3 +43,20 @@ except:
 
 cursor.execute("commit")
 ```
+
+## insert data into aisles table
+```
+import csv
+with open('aisles.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    count=0
+    for row in csv_reader:
+        if count==0:
+            count=1
+            continue
+        query_String="Insert into aisles_t(aisles_id,aisles) values(" + row[0] + "," + "'" + row[1]+ "'" +")"
+        cursor.execute(query_String)
+        count=count+1
+cursor.execute("commit")
+print "Number of successful records are "+str(count)
+```
