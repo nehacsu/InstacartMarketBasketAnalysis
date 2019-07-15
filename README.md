@@ -24,4 +24,4 @@ cursor = connection.cursor()
 The data files used in this project are quite large. The Orders.csv file contains 30 million rows. I found Excel to be inefficient in opening such a large data set file. Then I tried reading the files directly through Python; but Python was also not able to read such a large file at a time. So I pushed all the data files to the Oracle Server and then analyzed the data through SQL queries. 
 
 ## How to push data files to SQL server
-Read each file 
+#### For the demo purpose we have kept the limit. As this data set is very large it will take a lot of time to upload it into Oracle data base.
