@@ -66,7 +66,7 @@ Similarly, we created Department table, Order-Product table,Product table and Or
 
 After pushing all the data to the SQL Server, we tried to visualize the data to get a useful insight from it. For the visulization purpose, first we got the results through SQL query and then used the SQL generated output to  plot various charts and graphs using Matplotlib library. One example can be seen here:
 
-# how many orders are there which have 1 product,2 product,3 product and like that....
+### On an average how many products are there in an Order
 ```
 import pandas as pd
 query_string="""select count(order_id),cnt from (select order_id,count(product_id)as cnt from order_products__prior_t  group by order_id) group by cnt"""
@@ -102,3 +102,5 @@ plt.title("Products in the Orders",fontsize=fsize)
 plt.savefig('neha.png',bbox_inches='tight')
 plt.show()
 ```
+The output link can be found here:
+https://github.com/nehacsu/InstacartMarketBasketAnalysis/blob/master/download.png
