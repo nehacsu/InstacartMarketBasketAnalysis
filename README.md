@@ -60,3 +60,45 @@ with open('aisles.csv') as csv_file:
 cursor.execute("commit")
 print "Number of successful records are "+str(count)
 ```
+Similarly, we created Department table, Order-Product table,Product table and Order Table. Then we pushed all the data into SQL Server by reading the lines in CSV file as a query string.
+
+## Data Visualization using Matplotlib Library in Python
+
+After pushing all the data to the SQL Server, we tried to visualize the data to get a useful insight from it. For the visulization purpose, first we got the results through SQL query and then used the SQL generated output to  plot various charts and graphs using Matplotlib library. One example can be seen here:
+
+# how many orders are there which have 1 product,2 product,3 product and like that....
+```
+import pandas as pd
+query_string="""select count(order_id),cnt from (select order_id,count(product_id)as cnt from order_products__prior_t  group by order_id) group by cnt"""
+
+targetfile='results\order_product.csv'
+data = cursor.execute(query_string)
+results =  data.fetchall()
+import csv
+with open(targetfile, 'wb') as csvfile:
+    datawriter = csv.writer(csvfile, delimiter=',')
+    for line in results:
+        datawriter.writerow(list(line))
+dataf2=pd.DataFrame(results)
+```
+
+```
+from matplotlib import pyplot as plt
+from pylab import *
+import pandas as pd
+fsize=16
+fig = plt.figure(figsize=(15,10))
+plt.bar(dataf2.iloc[:,1],dataf2.iloc[:,0],linewidth=5, color='coral')
+#plt.xticks(datanp[:,1], rotation='90', fontsize=fsize)
+plt.xlim(0,50)
+plt.yticks(fontsize=fsize)
+
+plt.xlabel("Product Count",fontsize=fsize)
+plt.ylabel("No. of Orders",fontsize=fsize)
+plt.title("Products in the Orders",fontsize=fsize)
+
+# Again, this doesn't work in interactive mode.
+[i.set_linewidth(3) for i in gca().spines.itervalues()]
+plt.savefig('neha.png',bbox_inches='tight')
+plt.show()
+```
