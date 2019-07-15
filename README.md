@@ -25,3 +25,19 @@ The data files used in this project are quite large. The Orders.csv file contain
 
 ## How to push data files to SQL server
 #### For the demo purpose we have kept the limit. As this data set is very large it will take a lot of time to upload it into Oracle data base.
+## Create aisle table
+try:
+    query_String = "drop table aisles_t cascade constraints"
+    cursor.execute(query_String)
+    print "dropped"
+except:
+    print "already dropped"
+    
+try:
+    query_String="Create table aisles_t (aisles_id number not null,aisles varchar(50),constraint aisles_id_PK PRIMARY KEY (aisles_id))"
+    cursor.execute(query_String)
+    print"Table created"
+except:
+    print"Table already there"
+
+cursor.execute("commit")
